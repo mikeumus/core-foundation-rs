@@ -295,6 +295,29 @@ impl NSArray for id {
     }
 }
 
+pub trait NSNumber: Sized {
+    unsafe fn init(self) -> id;
+    // unsafe fn alloc(_: Self) -> id {
+    //     msg_send![class!(NSString), alloc]
+    // }
+
+    unsafe fn number(_: Self) -> id {
+        msg_send![class!(NSNumber), number]
+    }
+
+    unsafe fn initWithBool_(self, value: BOOL) -> id;
+}
+
+impl NSNumber for id {
+    unsafe fn init(self) -> id {
+        msg_send![self, init]
+    }
+
+    unsafe fn initWithBool_(self, value: BOOL) -> id {
+        msg_send![class!(NSNumber), initWithBool:value]
+    }
+}
+
 pub trait NSDictionary: Sized {
     unsafe fn dictionary(_: Self) -> id {
         msg_send![class!(NSDictionary), dictionary]
