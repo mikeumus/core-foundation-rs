@@ -63,6 +63,32 @@ mod foundation {
         }
     }
 
+    mod nsnumber {
+        use cocoa_foundation::foundation::NSNumber;
+        use cocoa_foundation::base::nil;
+
+        #[test]
+        fn test_init_with_bool_false() {
+            unsafe {
+                println!("🔢 test_num false begins");
+                let test_num = NSNumber::initWithBool_(nil, cocoa_foundation::base::NO);
+                println!("🔢2️⃣ test_num false: {:?}", test_num);
+                println!("🔢0️⃣ test_num nil: {:?}", nil);
+                assert_eq!(nil, test_num);
+            }
+        }
+
+        #[test]
+        fn test_init_with_bool_true() {
+            unsafe {
+                println!("🔢 test_num true begins");
+                let test_num = NSNumber::initWithBool_(nil, cocoa_foundation::base::YES);
+                println!("🔢2️⃣ test_num true: {:?}", test_num);
+                assert_eq!(nil, test_num);
+            }
+        }
+    }
+
     mod nsfastenumeration {
         use std::str;
         use std::slice;

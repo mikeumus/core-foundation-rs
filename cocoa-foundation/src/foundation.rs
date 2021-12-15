@@ -295,26 +295,59 @@ impl NSArray for id {
     }
 }
 
-pub trait NSNumber: Sized {
-    unsafe fn init(self) -> id;
-    // unsafe fn alloc(_: Self) -> id {
-    //     msg_send![class!(NSString), alloc]
-    // }
+// pub trait NSString: Sized {
+//     unsafe fn alloc(_: Self) -> id {
+//         msg_send![class!(NSString), alloc]
+//     }
 
-    unsafe fn number(_: Self) -> id {
-        msg_send![class!(NSNumber), number]
+//     unsafe fn stringByAppendingString_(self, other: id) -> id;
+//     unsafe fn init_str(self, string: &str) -> Self;
+//     unsafe fn UTF8String(self) -> *const libc::c_char;
+//     unsafe fn len(self) -> usize;
+//     unsafe fn isEqualToString(self, &str) -> bool;
+//     unsafe fn substringWithRange(self, range: NSRange) -> id;
+// }
+
+// impl NSString for id {
+//     unsafe fn isEqualToString(self, other: &str) -> bool {
+//         let other = NSString::alloc(nil).init_str(other);
+//         let rv: BOOL = msg_send![self, isEqualToString:other];
+//         rv != NO
+//     }
+
+//     unsafe fn stringByAppendingString_(self, other: id) -> id {
+//         msg_send![self, stringByAppendingString:other]
+//     }
+
+//     unsafe fn init_str(self, string: &str) -> id {
+//         return msg_send![self,
+//                          initWithBytes:string.as_ptr()
+//                              length:string.len()
+//                              encoding:UTF8_ENCODING as id];
+//     }
+// }
+
+pub trait NSNumber: Sized {
+    // unsafe fn init(self) -> id;
+    unsafe fn alloc(_: Self) -> id {
+        msg_send![class!(NSNumber), alloc]
     }
+
+    // unsafe fn number(_: Self) -> id {
+    //     msg_send![class!(NSNumber), number]
+    // }
 
     unsafe fn initWithBool_(self, value: BOOL) -> id;
 }
 
 impl NSNumber for id {
-    unsafe fn init(self) -> id {
-        msg_send![self, init]
-    }
+    // unsafe fn init(self) -> id {
+    //     msg_send![self, init]
+    // }
 
     unsafe fn initWithBool_(self, value: BOOL) -> id {
-        msg_send![class!(NSNumber), initWithBool:value]
+        // msg_send![class!(NSNumber), booleanLiteral:value]
+        msg_send![self, booleanLiteral:value]
     }
 }
 
