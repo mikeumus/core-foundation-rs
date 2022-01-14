@@ -339,6 +339,8 @@ pub trait NSNumber: Sized {
     // }
 
     unsafe fn initWithBool(self, value: BOOL) -> id;
+    
+    unsafe fn numberWithBool(self, value: BOOL) -> id;
 }
 
 impl NSNumber for id {
@@ -349,6 +351,10 @@ impl NSNumber for id {
     unsafe fn initWithBool(self, value: BOOL) -> id {
         // msg_send![class!(NSNumber), booleanLiteral:value]
         msg_send![self, booleanLiteral:value]
+    }
+    
+    unsafe fn numberWithBool(self, value: BOOL) -> id {
+        msg_send![class!(NSNumber), numberWithBool:value]
     }
 
     // unsafe fn objectAtIndex(self, index: NSUInteger) -> id {
