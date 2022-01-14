@@ -354,7 +354,8 @@ impl NSNumber for id {
     }
     
     unsafe fn numberWithBool(self, value: BOOL) -> id {
-        msg_send![class!(NSNumber), numberWithBool:value]
+        // msg_send![class!(NSNumber), numberWithBool:value]
+        msg_send![self, numberWithBool:value]
     }
 
     // unsafe fn objectAtIndex(self, index: NSUInteger) -> id {
