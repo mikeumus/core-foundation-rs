@@ -330,9 +330,9 @@ impl NSArray for id {
 pub trait NSNumber: Sized {
     unsafe fn init(self) -> id;
 
-    // unsafe fn alloc(_: Self) -> id {
-    //     msg_send![class!(NSNumber), alloc]
-    // }
+    unsafe fn alloc(_: Self) -> id {
+        msg_send![class!(NSNumber), alloc]
+    }
 
     // unsafe fn number(_: Self) -> id {
     //     msg_send![class!(NSNumber), number]
@@ -355,7 +355,8 @@ impl NSNumber for id {
     
     unsafe fn numberWithBool(self, value: BOOL) -> id {
         // msg_send![class!(NSNumber), numberWithBool:value]
-        msg_send![self, numberWithBool:value]
+        msg_send![class!(NSNumber), numberWithBool:value]
+        // msg_send![self, numberWithBool:value]
     }
 
     // unsafe fn objectAtIndex(self, index: NSUInteger) -> id {
